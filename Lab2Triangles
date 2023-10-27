@@ -1,0 +1,80 @@
+/*Kenyon Baldwin
+September 1st 2023
+CSC 331 - 001
+Dr. White
+Purpose: Practice what was learned in Chapter 6 slides with new methods.
+*/
+
+import java.util.Scanner;
+
+public class PythagoreanBaldwinKenyon {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the maxiumum value for sides (A, B, C(hypotnuse): ");
+        int maxSide = scanner.nextInt();
+
+        int count = 0;
+
+        System.out.println("Pythagorean Triples:");
+        System.out.println("A\tB\tHypotenuse");
+
+        for (int a = 1; a <= maxSide; a++) {
+            for (int b = a; b <= maxSide; b++) {
+                for (int c = b; c <= maxSide; c++) {
+                    if (a * a + b * b == c * c) {
+                        System.out.println(a + "\t" + b + "\t" + c);
+                        count++;
+
+                    }
+                }
+            }
+        }
+        System.out.println("Number of unique Pythagorean triples found: " + count);
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------
+//pyth triples
+import java.util.Random;
+import java.util.Scanner;
+
+public class pythTriples {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose an option:");
+        System.out.println("1. Provide an integer value");
+        System.out.println("2. Randomly generate an integer value");
+
+        int choice = scanner.nextInt();
+        int maxValue = 0;
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter the maximum side length: ");
+                maxValue = scanner.nextInt();
+                break;
+            case 2:
+                Random rand = new Random();
+                maxValue = rand.nextInt(100); // You can adjust the maximum value as needed.
+                System.out.println("Randomly generated maximum side length: " + maxValue);
+                break;
+            default:
+                System.out.println("Invalid choice. Exiting.");
+                return;
+        }
+
+        pythTriples(maxValue);
+    }
+
+    public static void pythTriples(int maxValue) {
+        System.out.println("Pythagorean triples with side values less than " + maxValue + ":");
+        for (int a = 1; a < maxValue; a++) {
+            for (int b = a; b < maxValue; b++) {
+                for (int c = b; c < maxValue; c++) {
+                    if (a * a + b * b == c * c) {
+                        System.out.println(a + ", " + b + ", " + c);
+                    }
+                }
+            }
+        }
+    }
+}
