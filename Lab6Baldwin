@@ -1,0 +1,92 @@
+/*Kenyon Baldwin
+Professor White
+Oct 26th 2023
+Purpose: Using getters and setters to return cost of travel by air, water, or land.
+ */
+
+// WaterTransportation.java
+
+public class WaterTransportation {
+    private double cost;
+    private String ticketOrRental;
+    private double averageSpeed;
+    private int maxPassengers;
+
+    public WaterTransportation(double cost, String ticketOrRental, double averageSpeed, int maxPassengers) {
+        this.cost = cost;
+        this.ticketOrRental = ticketOrRental;
+        this.averageSpeed = averageSpeed;
+        this.maxPassengers = maxPassengers;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public String getTicketOrRental() {
+        return ticketOrRental;
+    }
+
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
+
+    public int getMaxPassengers() {
+        return maxPassengers;
+    }
+
+
+    public String toString() {
+        return "Cost: " + cost + ", Ticket or Rental: " + ticketOrRental + ", Average Speed: " + averageSpeed + ", Max Passengers: " + maxPassengers;
+    }
+}
+
+// Boat.java
+public class Boat extends WaterTransportation {
+    public Boat(double cost, String ticketOrRental, double averageSpeed, int maxPassengers) {
+        super(cost, ticketOrRental, averageSpeed, maxPassengers);
+    }
+
+
+    public String toString() {
+        return "Boat\n" + super.toString();
+    }
+}
+
+// Ship.java
+public class Ship extends WaterTransportation {
+    private int numDecks;
+
+    public Ship(double cost, String ticketOrRental, double averageSpeed, int maxPassengers, int numDecks) {
+        super(cost, ticketOrRental, averageSpeed, maxPassengers);
+        this.numDecks = numDecks;
+    }
+
+    public int getNumDecks() {
+        return numDecks;
+    }
+
+
+    public String toString() {
+        return "Ship\n" + super.toString() + ", Number of Decks: " + numDecks;
+    }
+}
+
+// Submarine.java
+public class Submarine extends WaterTransportation {
+    private double depthCapability;
+
+    public Submarine(double cost, String ticketOrRental, double averageSpeed, int maxPassengers, double depthCapability) {
+        super(cost, ticketOrRental, averageSpeed, maxPassengers);
+        this.depthCapability = depthCapability;
+    }
+
+    public double getDepthCapability() {
+        return depthCapability;
+    }
+
+
+    public String toString() {
+        return "Submarine\n" + super.toString() + ", Depth Capability: " + depthCapability;
+    }
+}
