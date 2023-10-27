@@ -1,0 +1,140 @@
+/*
+-Kenyon Baldwin
+- CSC 331 - 001
+-October 6th 2023
+-Purpose: Get comfortable with classes and create a game of die.
+ */
+
+
+public class Die {
+    private int numSides;
+    private String primaryColor;
+    private String secondaryColor;
+    private String numColor;
+    private int[] sideValues;
+
+    // Constructor
+    public Die(int numSides, String primaryColor, String secondaryColor, String numColor, int[] sideValues) {
+        this.numSides = numSides;
+        this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
+        this.numColor = numColor;
+        this.sideValues = sideValues;
+    }
+
+    // Getter methods
+    public int getNumSides() {
+        return numSides;
+    }
+
+    public String getPrimaryColor() {
+        return primaryColor;
+    }
+
+    public String getSecondaryColor() {
+        return secondaryColor;
+    }
+
+    public String getNumColor() {
+        return numColor;
+    }
+
+    public int[] getSideValues() {
+        return sideValues;
+    }
+
+    // Setter methods
+    public void setNumSides(int numSides) {
+        this.numSides = numSides;
+    }
+
+    public void setPrimaryColor(String primaryColor) {
+        this.primaryColor = primaryColor;
+    }
+
+    public void setSecondaryColor(String secondaryColor) {
+        this.secondaryColor = secondaryColor;
+    }
+
+    public void setNumColor(String numColor) {
+        this.numColor = numColor;
+    }
+
+    public void setSideValues(int[] sideValues) {
+        this.sideValues = sideValues;
+    }
+
+    // Roll method
+    public int roll() {
+        int randomIndex = (int) (Math.random() * numSides);
+        return sideValues[randomIndex];
+    }
+}
+---------------------------------------------------------------------------------------------
+//die game
+import java.util.Scanner;
+
+public class DieGame {
+    public static void main(String[] args) {
+        // Creating first die
+        int[] values1 = new int[20];
+        for (int i = 0; i < 20; i++) {
+            values1[i] = i + 1;
+        }
+        Die die1 = new Die(20, "blue", "green", "gold", values1); // Using blue and green as favorite colors for this example
+
+        // Creating second die
+        int[] values2 = {00, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+        Die die2 = new Die(10, "yellow", "brown", "silver", values2); // Using yellow and brown as least favorite colors for this example
+
+        // Display attributes
+        displayDieAttributes(die1);
+        displayDieAttributes(die2);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to play a game? (yes/no)");
+        String answer = scanner.nextLine().toLowerCase();
+
+        while (answer.equals("yes")) {
+            System.out.println("Which die will be the first to roll a 10? (1/2)");
+            int guess = scanner.nextInt();
+
+            boolean is10Rolled = false;
+            while (!is10Rolled) {
+                int die1Value = die1.roll();
+                int die2Value = die2.roll();
+
+                System.out.println("Die 1 rolled: " + die1Value);
+                System.out.println("Die 2 rolled: " + die2Value);
+
+                if (die1Value == 10 || die2Value == 10) {
+                    is10Rolled = true;
+                    if ((die1Value == 10 && guess == 1) || (die2Value == 10 && guess == 2)) {
+                        System.out.println("Congrats! You won!");
+                    } else {
+                        System.out.println("You lost.");
+                    }
+                }
+            }
+
+            System.out.println("Do you want to play again? (yes/no)");
+            scanner.nextLine(); // Clearing the input buffer
+            answer = scanner.nextLine().toLowerCase();
+        }
+        scanner.close();
+    }
+
+    private static void displayDieAttributes(Die die) {
+        System.out.println("==================================");
+        System.out.println("Number of sides: " + die.getNumSides());
+        System.out.println("Primary color: " + die.getPrimaryColor());
+        System.out.println("Secondary color: " + die.getSecondaryColor());
+        System.out.println("Number color: " + die.getNumColor());
+        System.out.print("Side values: ");
+        for (int value : die.getSideValues()) {
+            System.out.print(value + " ");
+        }
+        System.out.println("\n==================================");
+    }
+}
+
