@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+/**
+ * Baldwin, Kenyon
+ * date: 2023-09-14
+ * section: CSC 331 - 001
+ * Purpose: This program provides various string modification utilities.
+ */
+public class StringModsBaldwinKenyon {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Prompt user for inputs
+        System.out.print("Enter the first string: ");
+        String str1 = sc.nextLine();
+         System.out.print("Enter the second string: ");
+        String str2 = sc.nextLine();
+        System.out.print("Enter an integer: ");
+        int n = sc.nextInt();
+        System.out.print("Enter a double: ");
+        double d = sc.nextDouble();
+
+        // Call methods and display results
+        System.out.println("After removing nth character: " + stringMod(str1, n));
+        System.out.println("After replacing 'e' with double: " + stringMod(str1, d));
+        System.out.println("After mixing both strings: " + stringMod(str1, str2));
+
+        sc.close();
+    }
+
+    /**
+     * Removes every nth character in a string.
+     * param str The string to modify.
+     * param n The position of characters to remove.
+     * return The modified string.
+     */
+    public static String stringMod(String str, int n) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if ((i + 1) % n != 0) {
+                result.append(str.charAt(i));
+            }
+        }
+
+        return result.toString();
+    }
+
+    /**
+     * Replaces every 'e' in a string with a given double.
+     * param str The string to modify.
+     * param d The double value to replace 'e' with.
+     * return The modified string.
+     */
+    public static String stringMod(String str, double d) {
+        return str.replace("e", String.valueOf(d));
+    }
+
+    /**
+     * Creates a new string that changes letters from two given strings.
+     * param str1 The first string.
+     * param str2 The second string.
+     * return The new string created by alternating letters.
+     */
+    public static String stringMod(String str1, String str2) {
+        StringBuilder result = new StringBuilder();
+        int len1 = str1.length();
+        int len2 = str2.length();
+        int maxLen = Math.max(len1, len2);
+
+        for (int i = 0; i < maxLen; i++) {
+            if (i < len1) {
+                result.append(str1.charAt(i));
+            }
+            if (i < len2) {
+                result.append(str2.charAt(i));
+            }
+        }
+
+        return result.toString();
+    }
+}
