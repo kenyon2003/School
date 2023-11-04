@@ -1,0 +1,147 @@
+/*Kenyon Baldwin
+Date: October 31st 2023
+Purpose: Learning Heritage and implementing in our coding.
+Doctor White
+Sources that helped: https://www.w3schools.com/java/java_inheritance.asp,
+https://www.w3schools.com/java/java_abstract.asp,
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
+
+ */
+
+
+
+abstract class Shape {
+
+}
+
+//  abstract classes for two-dimensional and three-dimensional shapes
+abstract class TwoDimensionalShape extends Shape {
+    abstract double getArea();
+}
+
+abstract class ThreeDimensionalShape extends Shape {
+    abstract double getArea();
+    abstract double getVolume();
+}
+
+// Implement classes for two-dimensional shapes
+class Circle extends TwoDimensionalShape {
+    private double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+
+    double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square extends TwoDimensionalShape {
+    private double side;
+
+    Square(double side) {
+        this.side = side;
+    }
+
+
+    double getArea() {
+        return side * side;
+    }
+}
+
+class Triangle extends TwoDimensionalShape {
+    private double base;
+    private double height;
+
+    Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+
+    double getArea() {
+        return 0.5 * base * height;
+    }
+}
+
+// Implement classes for three-dimensional shapes
+class Cube extends ThreeDimensionalShape {
+    private double side;
+
+    Cube(double side) {
+        this.side = side;
+    }
+
+
+    double getArea() {
+        return 6 * side * side;
+    }
+
+
+    double getVolume() {
+        return side * side * side;
+    }
+}
+
+class Sphere extends ThreeDimensionalShape {
+    private double radius;
+
+    Sphere(double radius) {
+        this.radius = radius;
+    }
+
+
+    double getArea() {
+        return 4 * Math.PI * radius * radius;
+    }
+
+
+    double getVolume() {
+        return (4.0 / 3.0) * Math.PI * Math.pow(radius, 3);
+    }
+}
+
+class Tetrahedron extends ThreeDimensionalShape {
+    private double edge;
+
+    Tetrahedron(double edge) {
+        this.edge = edge;
+    }
+
+
+    double getArea() {
+        return Math.sqrt(3) * edge * edge;
+    }
+
+
+    double getVolume() {
+        return (Math.pow(edge, 3)) / (6 * Math.sqrt(2));
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Create instances of shapes and add them to an array of Shape references
+        Shape[] shapes = new Shape[8];
+        shapes[0] = new Circle(5);
+        shapes[1] = new Square(4);
+        shapes[2] = new Triangle(3, 4);
+        shapes[3] = new Cube(3);
+        shapes[4] = new Sphere(2.5);
+        shapes[5] = new Tetrahedron(4);
+        // Process the shapes and display their properties
+        for (Shape shape : shapes) {
+            if (shape instanceof TwoDimensionalShape) {
+                TwoDimensionalShape twoDShape = (TwoDimensionalShape) shape;
+                System.out.println("Area of the 2D shape: " + twoDShape.getArea());
+            } else if (shape instanceof ThreeDimensionalShape) {
+                ThreeDimensionalShape threeDShape = (ThreeDimensionalShape) shape;
+                System.out.println("Area of the 3D shape: " + threeDShape.getArea());
+                System.out.println("Volume of the 3D shape: " + threeDShape.getVolume());
+            }
+        }
+    }
+}
