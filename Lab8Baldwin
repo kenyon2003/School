@@ -1,0 +1,51 @@
+/*Kenyon Baldwin
+Date 11/09/23
+Purpose: Learning to open and read files.
+Dr White
+ */
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class PalindromeFinder {
+    public static boolean isPalindrome(String word) {
+        // if the word has 0 or 1 characters, it's a palindrome
+        if (word.length() <= 1) {
+            return true;
+        }
+        // Check if the first and last characters are the same
+        if (word.charAt(0) == word.charAt(word.length() - 1)) {
+            return isPalindrome(word.substring(1, word.length() - 1));
+        } else {
+            return false;
+        }
+    }
+
+    public static void findAndWritePalindromes(String inputFile, String outputFile) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+             FileWriter writer = new FileWriter(outputFile)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the line into words
+                String[] words = line.split("\\s+");
+                for (String word : words) {
+                    if (isPalindrome(word)) {
+                        // Write the palindrome to the output file
+                        writer.write(word + "\n");
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        String inputFile = "wordList.txt";
+        String outputFile = "palindromes.txt";
+        findAndWritePalindromes(inputFile, outputFile);
+        System.out.println("Palindromes have been written to " + outputFile);
+    }
+}
